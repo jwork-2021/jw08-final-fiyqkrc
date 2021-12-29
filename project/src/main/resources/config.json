@@ -1,0 +1,41 @@
+{
+  "DataPath": {
+    "win": "~/.pGame",
+    "linux": "~/.pGame",
+    "default": "~/.pGame"
+  },
+  "learningDataPath": "$/learning",
+  "DefalutWindowSize": {
+    "width": 500,
+    "height": 300
+  },
+  "World": {
+    "SceneSize":{
+      "width":1000,
+      "height":1000
+    },
+    "WorldScale":2,
+    "tileSize":20,
+    "monstersCreate":{
+      "corridor":0.1,
+      "room":0.15
+    }
+  },
+  "Log":{
+    "Level":"Info",
+    "Path":"$",
+    "TerminalOutput":true
+  },
+  "Creature": {
+    "Calabash": {
+      "name": "Calabash",
+      "health": 100,
+      "path": "image"
+    },
+    "Pangolin": {
+      "name": "Pangolin",
+      "health": 100,
+      "path": "pangolin"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Version 1.4.0
+	1.new thread executors support for AsciiPanel draw
+	2.add GameThread.threadset for threads manage 
+	3.game now can finish,exit and restart
+	4.fix the bullet sometimes can not hit enemy problem
+	5.creature create coin after die
+	6.add buff for game,you can pen box after battle in any room,after that you will get a random buff.
+	7.add exit node and box object thread recycle
+	8.optimize the add lock logic,improve performance
+	9.improve the keyboard user experience greatly
+	10.adjust value for every monster
+	...
+
+the game will be update continuously
