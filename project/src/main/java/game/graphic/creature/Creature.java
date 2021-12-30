@@ -1,6 +1,5 @@
 package game.graphic.creature;
 
-
 import com.alibaba.fastjson.JSONObject;
 import com.pFrame.Pixel;
 import com.pFrame.Position;
@@ -49,7 +48,6 @@ public abstract class Creature extends Thing implements Controllable, StatedSava
 
     protected CopyOnWriteArrayList<Addition> additions;
 
-
     public Creature(String absPath, int width, int height) {
         super(null);
 
@@ -67,7 +65,8 @@ public abstract class Creature extends Thing implements Controllable, StatedSava
         Bodys = new Body[8];
         if (!SourceMap.containsKey(absPath)) {
             for (int i = 0; i < 8; i++) {
-                Pixel[][] pixels = Pixel.valueOf(Objects.requireNonNull(GraphicItemGenerator.generateItem(absPath + String.format("/%d.png", i + 1), width, height)));
+                Pixel[][] pixels = Pixel.valueOf(Objects.requireNonNull(
+                        GraphicItemGenerator.generateItem(absPath + String.format("/%d.png", i + 1), width, height)));
                 Bodys[i] = new Body(pixels, width, height);
             }
             SourceMap.put(absPath, Bodys);
@@ -207,7 +206,8 @@ public abstract class Creature extends Thing implements Controllable, StatedSava
             this.setPosition(Position.getPosition(this.p.getX() - (int) y, this.p.getY() + (int) x));
             return true;
         } else {
-            return this.world.ThingMove(this, Position.getPosition(this.getCentralPosition().getX() - (int) y, this.getCentralPosition().getY() + (int) x));
+            return this.world.ThingMove(this, Position.getPosition(this.getCentralPosition().getX() - (int) y,
+                    this.getCentralPosition().getY() + (int) x));
         }
     }
 
@@ -219,14 +219,14 @@ public abstract class Creature extends Thing implements Controllable, StatedSava
         }
     }
 
-    public void pause(){
-        if(controller!=null) {
+    public void pause() {
+        if (controller != null) {
             controller.stop();
         }
     }
 
-    public void Continue(){
-        if(controller!=null){
+    public void Continue() {
+        if (controller != null) {
             controller.start();
         }
     }
@@ -236,22 +236,27 @@ public abstract class Creature extends Thing implements Controllable, StatedSava
 
     @Override
     public void dead() {
-        world.removeItem(this);
-        Tombstone tombstone = new Tombstone();
-        tombstone.setPosition(this.getPosition());
-        world.addItem(tombstone);
-        Coin coin = new Coin(this);
-        world.addItem(coin);
+        if (world != null) {
+            world.removeItem(this);
+            Tombstone tombstone = new Tombstone();
+            tombstone.setPosition(this.getPosition());
+            world.addItem(tombstone);
+            Coin coin = new Coin(this);
+            world.addItem(coin);
+        }
     }
 
     @Override
     public Creature searchAim() {
-        Location location = world.searchNearestEnemy(this, 7);
-        Thing thing = world.findThing(location);
-        if (thing instanceof Creature)
-            return (Creature) thing;
-        else
-            return null;
+        if (world != null) {
+            Location location = world.searchNearestEnemy(this, 7);
+            Thing thing = world.findThing(location);
+            if (thing instanceof Creature)
+                return (Creature) thing;
+            else
+                return null;
+        }
+        return null;
     }
 
     @Override
@@ -277,5 +282,3 @@ public abstract class Creature extends Thing implements Controllable, StatedSava
         coin = jsonObject.getObject("coin", Integer.class);
     }
 }
-
-

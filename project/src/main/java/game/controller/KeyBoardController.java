@@ -27,7 +27,6 @@ public class KeyBoardController extends CreatureController implements PFrameKeyL
         this.controllable = controllable;
     }
 
-
     @Override
     public void stop() {
         if (controllable != null) {
@@ -44,8 +43,10 @@ public class KeyBoardController extends CreatureController implements PFrameKeyL
         } else {
             Log.WarningLog(this, "controllable is null");
         }
-        thread.interrupt();
-        thread=null;
+        if (thread != null) {
+            thread.interrupt();
+            thread = null;
+        }
     }
 
     @Override
@@ -76,7 +77,6 @@ public class KeyBoardController extends CreatureController implements PFrameKeyL
 
     CopyOnWriteArrayList<Character> keyArray = new CopyOnWriteArrayList<>();
 
-
     @Override
     public void keyPressed(KeyEvent e) {
         if (allKeyCode.contains(e.getKeyChar())) {
@@ -99,7 +99,6 @@ public class KeyBoardController extends CreatureController implements PFrameKeyL
                 keyArray.remove((Character) e.getKeyChar());
         }
     }
-
 
     @Override
     public void run() {
