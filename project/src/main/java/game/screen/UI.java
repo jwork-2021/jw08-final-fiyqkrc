@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 
 public class UI {
     public static int START_PAGE = 0;
@@ -278,7 +277,7 @@ public class UI {
     public void newSingleGame() {
         World.multiPlayerMode = false;
         World.mainClient = false;
-        GameArchiveGenerator gameArchiveGenerator = new GameArchiveGenerator(2000, 2000, Config.DataPath+"/archive/"+ new Date(), 2);
+        GameArchiveGenerator gameArchiveGenerator = new GameArchiveGenerator(2000, 2000, null, 2);
         gameArchiveGenerator.generateWorldData();
         JSONObject jsonObject = gameArchiveGenerator.getWorldData();
         Calabash calabash = new Calabash();

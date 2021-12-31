@@ -8,6 +8,7 @@ import com.pFrame.pgraphic.PGraphicItem;
 import com.pFrame.pgraphic.PGraphicScene;
 import com.pFrame.pgraphic.PGraphicView;
 import game.Attack;
+import game.Config;
 import game.Location;
 import game.controller.AlgorithmController;
 import game.controller.KeyBoardController;
@@ -30,6 +31,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class World extends PGraphicScene {
@@ -43,7 +45,7 @@ public class World extends PGraphicScene {
 
     public UI screen;
     public int[][] worldArray;
-    private final String path;
+    private String path;
 
     private final HashMap<Integer, Creature> activeCreature = new HashMap<>();
 
@@ -583,6 +585,10 @@ public class World extends PGraphicScene {
     public void gameSaveData() {
         gamePause();
         try {
+            if (path == null) {
+                path = Config.DataPath + "/archive/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
+            }
+
             JSONObject data = new JSONObject();
             JSONArray itemData = new JSONArray();
             for (PGraphicItem item : Items) {
