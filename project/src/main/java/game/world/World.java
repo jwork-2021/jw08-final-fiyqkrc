@@ -587,6 +587,9 @@ public class World extends PGraphicScene {
         try {
             if (path == null) {
                 path = Config.DataPath + "/archive/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
+                if(!new File(path).getParentFile().exists()){
+                    GameArchiveGenerator.createPath(new File(path).getParent());
+                }
             }
 
             JSONObject data = new JSONObject();
